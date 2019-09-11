@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "354869055060",
+    "firebase_url": "https://fir-jetpack-9f809.firebaseio.com",
+    "project_id": "fir-jetpack-9f809",
+    "storage_bucket": "fir-jetpack-9f809.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354869055060:android:cbbdd13c905de63975a7c1",
+        "android_client_info": {
+          "package_name": "com.example.firebasejetpack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354869055060-s9vhoa5vhg34acikal0ljeiavsklql0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebasejetpack",
+            "certificate_hash": "f82b407e64c0e87bd311f078cf72f70c798fbcff"
+          }
+        },
+        {
+          "client_id": "354869055060-tov24vdm0n446s2d9i91on1dad4hg9uj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_l-FtvwDZCjUkVFRsfjjAb4ymqav3jYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354869055060-tov24vdm0n446s2d9i91on1dad4hg9uj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
