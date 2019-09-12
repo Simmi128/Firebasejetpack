@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -28,7 +30,7 @@ public class loginFragment extends Fragment implements View.OnClickListener{
    EditText edt_email,edt_pass;
    Button btn_log;
    TextView txt_reg;
-
+ Controller navCon;
 
    private FirebaseAuth auth;
    FirebaseUser user;
@@ -57,6 +59,7 @@ public class loginFragment extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
 
         auth = FirebaseAuth.getInstance();
+
     }
 
     @Override
@@ -107,22 +110,43 @@ public class loginFragment extends Fragment implements View.OnClickListener{
         }else if((id == R.id.txt_lrge))
         {
 
+            NavController navController = Navigation.findNavController(getActivity(),R.id.host_frag);
+            navController.navigate(R.id.registerFragment);
         }
     }
-    public void loginUser(String email,String pass)
-    {
-      auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-          @Override
-          public void onComplete(@NonNull Task<AuthResult> task) {
-              if(task.isSuccessful())
-              {
-                  user = auth.getCurrentUser();
-                  Toast.makeText(getActivity().getApplicationContext(),"login success",Toast.LENGTH_LONG).show();
-              }else{
 
-              Toast.makeText(getActivity().getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_LONG).show();
-              }
-          }
-      });
+    @Override
+    public void onStart() {
+        super.onStart();
+        user = auth.getCurrentUser();
+        if(user != null)
+        {
+            updateUI(user);
+            Toast.makeText(getActivity().getApplicationContext(),"User already login",Toast.LENGTH_LONG).show();
+        }
     }
+
+    public void loginUser(String email, String pass) {
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    user = auth.getCurrentUser();
+                    Toast.makeText(getActivity().getApplicationContext(), "login success", Toast.LENGTH_LONG).show();
+                    updateUI(user);
+                } else {
+
+                    Toast.makeText(getActivity().getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+      public void updateUI(FirebaseUser user)
+        {
+            navCon = new Controller();
+            Bundle b = new Bundle();
+            b.putParcelable("User",user);
+            navCon.navigateToFragment(R.id.dashboardFragment,getActivity(),b);
+        }
 }
+
